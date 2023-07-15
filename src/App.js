@@ -2,6 +2,7 @@ import React from "react";
 import NavBar from "./pages/NavBar";
 import { Routes, Route, Outlet } from "react-router-dom";
 import MusicList from "./pages/MusicList";
+import MusicPlayer from "./pages/MusicPlayer";
 
 function App() {
   return (
@@ -14,9 +15,7 @@ function App() {
           </Route>
         </Routes>
       </div>
-      <div className="#musicPlayer flex-none w-1/2 text-center">
-        <p>Music Player</p>
-      </div>
+      <MusicPlayer />
     </div>
   );
 }
