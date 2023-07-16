@@ -6,7 +6,7 @@ const Search = () => {
       <input
         type="text"
         placeholder="Search for Songs, Artists and more ..."
-        className="bg-transparent text-gray-200 w-full te focus:outline-none"
+        className="bg-transparent text-gray-200 w-full md:max-lg:w-4/5 te focus:outline-none"
       />
       <svg
         xmlns="http://www.w3.org/2000/svg"

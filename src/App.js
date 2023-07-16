@@ -6,9 +6,9 @@ import MusicPlayer from "./pages/MusicPlayer";
 
 function App() {
   return (
-    <div className="flex p-8 bg-bg_theme">
+    <div className="flex max-md:flex-col p-8 bg-bg_theme">
       <NavBar />
-      <div className="#musicList grow text-center">
+      <div className="grow text-center max-md:order-last">
         <Routes>
           <Route path="/" element={<Outlet />}>
             <Route index element={<MusicList />} />
