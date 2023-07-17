@@ -14,11 +14,11 @@ const GET_SONGS = gql`
   }
 `;
 
-const MusicPlaylist = ({ id }) => {
+const MusicPlaylist = ({ id, searchField }) => {
   const { loading, error, data } = useQuery(GET_SONGS, {
     variables: {
       playlistId: id,
-      search: null,
+      search: searchField === "" ? null : searchField,
     },
   });
 

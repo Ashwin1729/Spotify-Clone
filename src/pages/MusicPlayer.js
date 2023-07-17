@@ -17,8 +17,8 @@ const MusicPlayer = () => {
           <span className="text-white text-sm">1:11</span>
           <progress
             className="flex-1 mx-4 w-full h-1 border border-b-0 rounded-sm bg-slate-400"
-            value=""
-            max=""
+            value="30"
+            max="100"
           ></progress>
           <span className="text-white text-sm">4:44</span>
         </div>
