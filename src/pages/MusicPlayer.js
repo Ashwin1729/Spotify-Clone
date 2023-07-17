@@ -1,26 +1,80 @@
-import React from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { AppContext } from "../context/application-context";
 
 const MusicPlayer = () => {
+  const appCtx = useContext(AppContext);
+  const audioRef = useRef();
+  const sliderRef = useRef();
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTime, setCurrentTime] = useState("0:00");
+
+  // console.log(audioRef);
+
+  const songInfo = appCtx.currentSong;
+
+  useEffect(() => {
+    audioRef.current.src = songInfo?.url;
+    audioRef.current.load();
+    setIsPlaying(true);
+  }, [songInfo]);
+
+  const playButtonHandler = () => {
+    if (isPlaying) {
+      audioRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      audioRef.current.play();
+      setIsPlaying(true);
+    }
+  };
+
+  const currentTimeHandler = () => {
+    const audioCurrentTime = audioRef.current?.currentTime;
+    const minutes = "0" + Math.floor(audioCurrentTime / 60);
+    const seconds = "0" + Math.floor(audioCurrentTime - minutes * 60);
+    const duration = minutes.slice(-2) + ":" + seconds.slice(-2);
+    setCurrentTime(duration);
+  };
+
+  const prevSongHandler = () => {};
+
+  const nextSongHandler = () => {};
+
   return (
     <div className="flex flex-col items-center w-1/2 max-md:w-full text-center my-12 text-white">
       <div className="flex flex-col text-left w-7/12 ">
-        <h2 className="text-3xl font-semibold">It comes back to you</h2>
-        <p className="text-gray-400">Imagine Dragons</p>
+        <h2 className="text-3xl font-semibold">{songInfo?.title}</h2>
+        <p className="text-gray-400">{songInfo?.artist}</p>
       </div>
       <img
-        src="https://external-preview.redd.it/SEOiJhnBbwkfSbmAHFPh8UrvpyKcRLyVbdtf5DWNtGc.jpg?auto=webp&s=8f815af3594caa6f01ef25d3da2a8b4e1a4239a6"
-        alt="it comes back to you"
+        src={songInfo?.photo}
+        alt={songInfo?.title}
         className="rounded-lg object-contain h-7/12 w-7/12 my-6"
       />
       <div className="flex flex-col items-center justify-center w-7/12">
         <div className="flex items-center w-full">
-          <span className="text-white text-sm">1:11</span>
-          <progress
+          <span className="text-white text-sm">{currentTime}</span>
+          {/* <progress
             className="flex-1 mx-4 w-full h-1 border border-b-0 rounded-sm bg-slate-400"
-            value="30"
-            max="100"
-          ></progress>
-          <span className="text-white text-sm">4:44</span>
+            value={audioRef.current?.currentTime}
+            max={audioRef.current?.duration}
+          ></progress> */}
+          <div className="flex items-center mx-4 w-full h-1  rounded-sm bg-slate-500">
+            <div
+              className="bg-white my-0.5 h-1 rounded-full"
+              style={{
+                width: `${
+                  (audioRef.current?.currentTime / audioRef.current?.duration) *
+                  100
+                }%`,
+              }}
+            ></div>
+          </div>
+          <span className="text-white text-sm">
+            {songInfo?.duration?.toString().slice(0, 1) +
+              ":" +
+              songInfo?.duration?.toString().slice(1)}
+          </span>
         </div>
         <div className="flex items-center justify-center w-full py-2 my-4">
           <svg
@@ -41,17 +95,19 @@ const MusicPlayer = () => {
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="currentColor"
-              className="w-10 h-10 text-gray-200 mx-4 p-2 rounded-full hover:bg-gray-500 duration-500"
+              className="w-10 h-10 text-gray-200 mx-4 p-2 rounded-full hover:bg-gray-500 duration-500 cursor-pointer"
+              onClick={prevSongHandler}
             >
               <path d="M9.195 18.44c1.25.713 2.805-.19 2.805-1.629v-2.34l6.945 3.968c1.25.714 2.805-.188 2.805-1.628V8.688c0-1.44-1.555-2.342-2.805-1.628L12 11.03v-2.34c0-1.44-1.555-2.343-2.805-1.629l-7.108 4.062c-1.26.72-1.26 2.536 0 3.256l7.108 4.061z" />
             </svg>
 
-            {true ? (
+            {isPlaying ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="currentColor"
                 className="w-10 h-10 cursor-pointer text-gray-200 p-1 rounded-full hover:bg-gray-500 duration-500"
+                onClick={playButtonHandler}
               >
                 <path
                   fillRule="evenodd"
@@ -65,6 +121,7 @@ const MusicPlayer = () => {
                 viewBox="0 0 24 24"
                 fill="currentColor"
                 className="w-10 h-10 cursor-pointer text-gray-200 p-1 rounded-full hover:bg-gray-500 duration-500"
+                onClick={playButtonHandler}
               >
                 <path
                   fillRule="evenodd"
@@ -77,7 +134,8 @@ const MusicPlayer = () => {
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="currentColor"
-              className="w-10 h-10 text-gray-200 mx-4 p-2 rounded-full hover:bg-gray-500 duration-500"
+              className="w-10 h-10 text-gray-200 mx-4 p-2 rounded-full hover:bg-gray-500 duration-500 cursor-pointer"
+              onClick={nextSongHandler}
             >
               <path d="M5.055 7.06c-1.25-.714-2.805.189-2.805 1.628v8.123c0 1.44 1.555 2.342 2.805 1.628L12 14.471v2.34c0 1.44 1.555 2.342 2.805 1.628l7.108-4.061c1.26-.72 1.26-2.536 0-3.256L14.805 7.06C13.555 6.346 12 7.25 12 8.688v2.34L5.055 7.06z" />
             </svg>
@@ -93,6 +151,13 @@ const MusicPlayer = () => {
           </svg>
         </div>
       </div>
+
+      <audio
+        autoPlay
+        controls
+        ref={audioRef}
+        onTimeUpdate={currentTimeHandler}
+      />
     </div>
   );
 };

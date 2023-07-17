@@ -14,15 +14,13 @@ const MusicList = ({ id }) => {
     playlistName = "Recently Played";
   }
 
-  const [search, setSearch] = useState("");
-
   return (
     <div className="flex flex-col justify-center items-center px-2 mx-2">
       <h1 className="text-3xl w-full text-left text-white font-semibold">
         {playlistName}
       </h1>
-      <Search search={search} setSearchHandler={setSearch} />
-      <MusicPlaylist id={id} searchField={search} />
+      <Search />
+      <MusicPlaylist id={id} />
     </div>
   );
 };

@@ -1,11 +1,13 @@
-import React, { useRef } from "react";
+import React, { useRef, useContext } from "react";
+import { AppContext } from "../context/application-context";
 
-const Search = ({ search, setSearchHandler }) => {
+const Search = () => {
   const searchRef = useRef();
+  const appCtx = useContext(AppContext);
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
-    setSearchHandler(search);
+    appCtx.setSearchHandler(appCtx.search);
   };
 
   return (
@@ -19,8 +21,8 @@ const Search = ({ search, setSearchHandler }) => {
           placeholder="Search for Songs, Artists and more ..."
           className="bg-transparent text-gray-200 w-full md:max-lg:w-4/5 te focus:outline-none"
           ref={searchRef}
-          value={search}
-          onChange={() => setSearchHandler(searchRef.current?.value)}
+          value={appCtx.search}
+          onChange={() => appCtx.setSearchHandler(searchRef.current?.value)}
         />
 
         <svg
