@@ -15,3 +15,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.seeking_slider {
+  @apply w-full h-[4px] rounded-sm overflow-hidden cursor-pointer bg-[rgba(255,255,255,0.20)] appearance-none;
+
+  &::-webkit-slider-thumb {
+    @apply w-1 h-[20px] shadow-[-400px_0px_0px_400px_rgba(255,255,255)] appearance-none;
+  }
+}

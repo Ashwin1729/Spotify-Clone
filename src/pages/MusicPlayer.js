@@ -50,6 +50,17 @@ const MusicPlayer = () => {
     setCurrentTime(duration);
   };
 
+  const seekSliderHandler = (event) => {
+    const seekerValue = event.target.value;
+    const minutes = "0" + Math.floor(seekerValue / 60);
+    const seconds = "0" + Math.floor(seekerValue - minutes * 60);
+    const duration = minutes.slice(-2) + ":" + seconds.slice(-2);
+    if (audioRef.current) {
+      audioRef.current.currentTime = seekerValue;
+    }
+    setCurrentTime(duration);
+  };
+
   const prevSongHandler = () => {
     const currentSongIndex = appCtx.currentPlaylist
       .map((song) => song._id)
@@ -87,22 +98,17 @@ const MusicPlayer = () => {
       <div className="flex flex-col items-center justify-center w-7/12">
         <div className="flex items-center w-full">
           <span className="text-white text-sm">{currentTime}</span>
-          {/* <progress
-            className="flex-1 mx-4 w-full h-1 border border-b-0 rounded-sm bg-slate-400"
-            value={audioRef.current?.currentTime}
-            max={audioRef.current?.duration}
-          ></progress> */}
-          <div className="flex items-center mx-4 w-full h-1  rounded-sm bg-slate-500">
-            <div
-              className="bg-white my-0.5 h-1 rounded-full"
-              style={{
-                width: `${
-                  (audioRef.current?.currentTime / audioRef.current?.duration) *
-                  100
-                }%`,
-              }}
-            ></div>
+
+          <div className="flex items-center mx-4 w-full h-1 rounded-sm bg-slate-500">
+            <input
+              type="range"
+              value={audioRef.current?.currentTime ?? 0}
+              max={audioRef.current?.duration ?? 0}
+              className="seeking_slider"
+              onChange={seekSliderHandler}
+            />
           </div>
+
           <span className="text-white text-sm">
             {songInfo?.duration?.toString().slice(0, 1) +
               ":" +
@@ -219,12 +225,7 @@ const MusicPlayer = () => {
         </div>
       </div>
 
-      <audio
-        autoPlay
-        controls
-        ref={audioRef}
-        onTimeUpdate={currentTimeHandler}
-      />
+      <audio autoPlay ref={audioRef} onTimeUpdate={currentTimeHandler} />
     </div>
   );
 };
