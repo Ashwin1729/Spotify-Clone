@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 const NavBar = () => {
   const [navClick, setNavClick] = useState(false);
+  const [activeLink, setActiveLink] = useState(1);
 
   const navStyle = navClick
     ? "flex flex-col py-8 opacity-1 max-h-screen transition-all duration-700"
@@ -15,6 +16,12 @@ const NavBar = () => {
     setNavClick((prevNavClick) => !prevNavClick);
   };
 
+  const activeLinkHandler = (id) => {
+    setActiveLink(id);
+  };
+
+  console.log(activeLink);
+
   return (
     <div className="flex md:flex-col lg:w-60 text-center justify-between h-auto text-white max-h">
       <div className="flex flex-col">
@@ -23,23 +30,43 @@ const NavBar = () => {
         </div>
         <nav className="text-left h-full duration-500 ease-in-out">
           <ul className={navStyle}>
-            <Link to="/">
-              <li className="text-base font-normal my-3 opacity-40 hover:opacity-100 cursor-pointer duration-500">
+            <Link to="/" onClick={() => activeLinkHandler(1)}>
+              <li
+                className="text-base font-normal my-3 opacity-40 hover:opacity-100 cursor-pointer duration-500"
+                style={{
+                  opacity: activeLink === 1 ? 1 : 0.4,
+                }}
+              >
                 For you
               </li>
             </Link>
-            <Link to="/top-tracks">
-              <li className="text-base font-normal my-3 opacity-40 hover:opacity-100 cursor-pointer duration-500">
+            <Link to="/top-tracks" onClick={() => activeLinkHandler(2)}>
+              <li
+                className="text-base font-normal my-3 opacity-40 hover:opacity-100 cursor-pointer duration-500"
+                style={{
+                  opacity: activeLink === 2 ? 1 : 0.4,
+                }}
+              >
                 Top Tracks
               </li>
             </Link>
-            <Link to="/favourites">
-              <li className="text-base font-normal my-3 opacity-40 hover:opacity-100 cursor-pointer duration-500">
+            <Link to="/favourites" onClick={() => activeLinkHandler(3)}>
+              <li
+                className="text-base font-normal my-3 opacity-40 hover:opacity-100 cursor-pointer duration-500"
+                style={{
+                  opacity: activeLink === 3 ? 1 : 0.4,
+                }}
+              >
                 Favourites
               </li>
             </Link>
-            <Link to="/recently-played">
-              <li className="text-base font-normal my-3 opacity-40 hover:opacity-100 cursor-pointer duration-500">
+            <Link to="/recently-played" onClick={() => activeLinkHandler(4)}>
+              <li
+                className="text-base font-normal my-3 opacity-40 hover:opacity-100 cursor-pointer duration-500"
+                style={{
+                  opacity: activeLink === 4 ? 1 : 0.4,
+                }}
+              >
                 Recently Played
               </li>
             </Link>

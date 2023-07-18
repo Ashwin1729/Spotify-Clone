@@ -8,7 +8,6 @@ import { AppContext } from "./context/application-context";
 function App() {
   const appCtx = useContext(AppContext);
   const backgroundGradient = appCtx.backgroundGradient;
-  console.log(backgroundGradient);
 
   return (
     <div
