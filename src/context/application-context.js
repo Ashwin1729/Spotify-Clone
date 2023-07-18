@@ -7,20 +7,21 @@ export const AppContext = createContext({
   setCurrentSongHandler: (song) => {},
   currentPlaylist: [],
   setCurrentPlaylistHandler: (playlist) => {},
+  backgroundGradient: "",
+  setBackgroundGradientHandler: (gradient) => {},
   //   duration: 0,
   //   setDurationHandler: () => {},
   //   currentTime: "",
   //   setCurrentTimeHandler: () => {},
   //   isPlaying: false,
   //   setIsPlayingHandler: () => {},
-  //   background: "",
-  //   setBackgroundHandler: () => {},
 });
 
 const AppContextProvider = (props) => {
   const [search, setSearch] = useState("");
   const [currentSong, setCurrentsong] = useState({});
   const [currentPlaylist, setCurrentPlaylist] = useState([]);
+  const [backgroundGradient, setBackgroundGradient] = useState("");
 
   useEffect(() => {
     setCurrentsong({
@@ -32,6 +33,10 @@ const AppContextProvider = (props) => {
       url: "https://storage.googleapis.com/similar_sentences/Imagine%20Dragons%20-%20West%20Coast%20(Pendona.com).mp3",
       duration: 320,
     });
+
+    setBackgroundGradient(
+      "linear-gradient(160deg, #2d3748 8%, rgba(1,0,2,1) 90%)"
+    );
   }, []);
 
   const setSearchHandler = (searchField) => {
@@ -46,6 +51,10 @@ const AppContextProvider = (props) => {
     setCurrentPlaylist(playlist);
   };
 
+  const setBackgroundGradientHandler = (gradient) => {
+    setBackgroundGradient(gradient);
+  };
+
   const store = {
     search,
     setSearchHandler,
@@ -53,6 +62,8 @@ const AppContextProvider = (props) => {
     setCurrentSongHandler,
     currentPlaylist,
     setCurrentPlaylistHandler,
+    backgroundGradient,
+    setBackgroundGradientHandler,
   };
 
   return (

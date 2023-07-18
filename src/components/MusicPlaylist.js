@@ -1,6 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../context/application-context";
+import ColorThief from "colorthief";
 
 const GET_SONGS = gql`
   query Query($playlistId: Int!, $search: String) {
@@ -26,13 +27,24 @@ const MusicPlaylist = ({ id }) => {
     },
   });
 
+  const implementGradient = (song) => {
+    const colorThief = new ColorThief();
+    const img = new Image();
+    img.crossOrigin = "Anonymous";
+    img.src = song.photo;
+    img.addEventListener("load", () => {
+      const color = colorThief.getColor(img);
+      const colorString = `linear-gradient(160deg , rgb(${color.join(
+        ","
+      )}) 8%, rgba(1,0,2,1) 90%)`;
+      appCtx.setBackgroundGradientHandler(colorString);
+    });
+  };
+
   useEffect(() => {
     const songExist =
       data?.getSongs.filter((song) => appCtx.currentSong?._id === song?._id)
         .length > 0;
-
-    // console.log(data?.getSongs, currentSong, songExist);
-    // console.log(appCtx.currentPlaylist);
 
     if (songExist) {
       appCtx.setCurrentPlaylistHandler(data?.getSongs);
@@ -40,6 +52,7 @@ const MusicPlaylist = ({ id }) => {
   }, [data, currentSong]);
 
   const songClickHandler = (song) => {
+    implementGradient(song);
     appCtx.setCurrentSongHandler(song);
   };
 
