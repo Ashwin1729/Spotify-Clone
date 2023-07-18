@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
 
 export const AppContext = createContext({
-  search: null,
+  search: "",
   setSearchHandler: (searchField) => {},
   currentSong: {},
   setCurrentSongHandler: (song) => {},
@@ -18,7 +18,7 @@ export const AppContext = createContext({
 });
 
 const AppContextProvider = (props) => {
-  const [search, setSearch] = useState(null);
+  const [search, setSearch] = useState("");
   const [currentSong, setCurrentsong] = useState({});
   const [currentPlaylist, setCurrentPlaylist] = useState([]);
 

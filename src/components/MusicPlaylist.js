@@ -37,7 +37,7 @@ const MusicPlaylist = ({ id }) => {
     if (songExist) {
       appCtx.setCurrentPlaylistHandler(data?.getSongs);
     }
-  }, [data]);
+  }, [data, currentSong]);
 
   const songClickHandler = (song) => {
     appCtx.setCurrentSongHandler(song);

@@ -4,8 +4,8 @@ import { AppContext } from "../context/application-context";
 const MusicPlayer = () => {
   const appCtx = useContext(AppContext);
   const audioRef = useRef();
-  const sliderRef = useRef();
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isMute, setIsMute] = useState(false);
   const [currentTime, setCurrentTime] = useState("0:00");
 
   // console.log(audioRef);
@@ -28,6 +28,11 @@ const MusicPlayer = () => {
     }
   };
 
+  const muteHandler = () => {
+    audioRef.current.muted = !audioRef.current.muted;
+    setIsMute((prevMuteState) => !prevMuteState);
+  };
+
   const currentTimeHandler = () => {
     const audioCurrentTime = audioRef.current?.currentTime;
     const minutes = "0" + Math.floor(audioCurrentTime / 60);
@@ -36,9 +41,28 @@ const MusicPlayer = () => {
     setCurrentTime(duration);
   };
 
-  const prevSongHandler = () => {};
+  const prevSongHandler = () => {
+    const currentSongIndex = appCtx.currentPlaylist
+      .map((song) => song._id)
+      .indexOf(songInfo._id);
 
-  const nextSongHandler = () => {};
+    const newIndex =
+      currentSongIndex === 0
+        ? appCtx.currentPlaylist.length - 1
+        : currentSongIndex - 1;
+
+    appCtx.setCurrentSongHandler(appCtx.currentPlaylist[newIndex]);
+  };
+
+  const nextSongHandler = () => {
+    const currentSongIndex = appCtx.currentPlaylist
+      .map((song) => song._id)
+      .indexOf(songInfo._id);
+
+    const newIndex = (currentSongIndex + 1) % appCtx.currentPlaylist.length;
+
+    appCtx.setCurrentSongHandler(appCtx.currentPlaylist[newIndex]);
+  };
 
   return (
     <div className="flex flex-col items-center w-1/2 max-md:w-full text-center my-12 text-white">
@@ -140,15 +164,49 @@ const MusicPlayer = () => {
               <path d="M5.055 7.06c-1.25-.714-2.805.189-2.805 1.628v8.123c0 1.44 1.555 2.342 2.805 1.628L12 14.471v2.34c0 1.44 1.555 2.342 2.805 1.628l7.108-4.061c1.26-.72 1.26-2.536 0-3.256L14.805 7.06C13.555 6.346 12 7.25 12 8.688v2.34L5.055 7.06z" />
             </svg>
           </div>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            className="w-12 h-10 text-gray-200 p-2 rounded-full hover:bg-gray-500 duration-500"
-          >
-            <path d="M13.5 4.06c0-1.336-1.616-2.005-2.56-1.06l-4.5 4.5H4.508c-1.141 0-2.318.664-2.66 1.905A9.76 9.76 0 001.5 12c0 .898.121 1.768.35 2.595.341 1.24 1.518 1.905 2.659 1.905h1.93l4.5 4.5c.945.945 2.561.276 2.561-1.06V4.06zM18.584 5.106a.75.75 0 011.06 0c3.808 3.807 3.808 9.98 0 13.788a.75.75 0 11-1.06-1.06 8.25 8.25 0 000-11.668.75.75 0 010-1.06z" />
-            <path d="M15.932 7.757a.75.75 0 011.061 0 6 6 0 010 8.486.75.75 0 01-1.06-1.061 4.5 4.5 0 000-6.364.75.75 0 010-1.06z" />
-          </svg>
+
+          {isMute ? (
+            <svg
+              version="1.0"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 225.000000 225.000000"
+              preserveAspectRatio="xMidYMid meet"
+              className="w-12 h-10 text-gray-200 p-2 rounded-full hover:bg-gray-500 duration-500 cursor-pointer"
+              onClick={muteHandler}
+            >
+              <g
+                transform="translate(0.000000,225.000000) scale(0.100000,-0.100000)"
+                fill="currentColor"
+                stroke="none"
+              >
+                <path
+                  d="M263 2048 c-21 -22 -27 -42 -24 -83 1 -23 1729 -1757 1775 -1781 55
+           -30 116 9 116 73 0 36 -14 52 -330 368 l-330 330 0 520 c0 558 0 558 -52 583
+           -50 24 -83 0 -334 -245 l-238 -233 -243 243 c-223 222 -246 242 -281 245 -29
+           2 -43 -2 -59 -20z"
+                />
+                <path
+                  d="M415 1463 c-11 -3 -30 -14 -42 -26 -23 -20 -23 -22 -23 -314 l0 -294
+           25 -24 c24 -25 27 -25 188 -25 l164 0 292 -287 c303 -298 346 -332 396 -313
+           43 16 55 63 55 207 l0 128 -478 478 c-475 474 -478 477 -517 476 -22 -1 -49
+           -3 -60 -6z"
+                />
+              </g>
+            </svg>
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="w-12 h-10 text-gray-200 p-2 rounded-full hover:bg-gray-500 duration-500 cursor-pointer"
+              onClick={muteHandler}
+            >
+              <path d="M13.5 4.06c0-1.336-1.616-2.005-2.56-1.06l-4.5 4.5H4.508c-1.141 0-2.318.664-2.66 1.905A9.76 9.76 0 001.5 12c0 .898.121 1.768.35 2.595.341 1.24 1.518 1.905 2.659 1.905h1.93l4.5 4.5c.945.945 2.561.276 2.561-1.06V4.06zM18.584 5.106a.75.75 0 011.06 0c3.808 3.807 3.808 9.98 0 13.788a.75.75 0 11-1.06-1.06 8.25 8.25 0 000-11.668.75.75 0 010-1.06z" />
+              <path d="M15.932 7.757a.75.75 0 011.061 0 6 6 0 010 8.486.75.75 0 01-1.06-1.061 4.5 4.5 0 000-6.364.75.75 0 010-1.06z" />
+            </svg>
+          )}
         </div>
       </div>
 
