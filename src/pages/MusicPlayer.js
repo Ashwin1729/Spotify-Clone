@@ -4,6 +4,7 @@ import { AppContext } from "../context/application-context";
 const MusicPlayer = () => {
   const appCtx = useContext(AppContext);
   const audioRef = useRef();
+  const initialRender = useRef(true);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMute, setIsMute] = useState(false);
   const [currentTime, setCurrentTime] = useState("0:00");
@@ -17,6 +18,14 @@ const MusicPlayer = () => {
     audioRef.current.load();
     setIsPlaying(true);
   }, [songInfo]);
+
+  useEffect(() => {
+    if (initialRender.current && appCtx.currentPlaylist.length > 0) {
+      initialRender.current = false;
+      setIsPlaying(false);
+      return;
+    }
+  }, [appCtx.currentPlaylist]);
 
   const playButtonHandler = () => {
     if (isPlaying) {
