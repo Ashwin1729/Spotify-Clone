@@ -49,10 +49,10 @@ const MusicPlaylist = ({ id }) => {
     if (songExist) {
       appCtx.setCurrentPlaylistHandler(data?.getSongs);
     }
+    implementGradient(currentSong);
   }, [data, currentSong]);
 
   const songClickHandler = (song) => {
-    implementGradient(song);
     appCtx.setCurrentSongHandler(song);
   };
 

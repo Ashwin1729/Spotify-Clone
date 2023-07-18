@@ -20,8 +20,6 @@ const NavBar = () => {
     setActiveLink(id);
   };
 
-  console.log(activeLink);
-
   return (
     <div className="flex md:flex-col lg:w-60 text-center justify-between h-auto text-white max-h">
       <div className="flex flex-col">
@@ -34,7 +32,7 @@ const NavBar = () => {
               <li
                 className="text-base font-normal my-3 opacity-40 hover:opacity-100 cursor-pointer duration-500"
                 style={{
-                  opacity: activeLink === 1 ? 1 : 0.4,
+                  opacity: activeLink === 1 ? 1 : "",
                 }}
               >
                 For you
@@ -44,7 +42,7 @@ const NavBar = () => {
               <li
                 className="text-base font-normal my-3 opacity-40 hover:opacity-100 cursor-pointer duration-500"
                 style={{
-                  opacity: activeLink === 2 ? 1 : 0.4,
+                  opacity: activeLink === 2 ? 1 : "",
                 }}
               >
                 Top Tracks
@@ -54,7 +52,7 @@ const NavBar = () => {
               <li
                 className="text-base font-normal my-3 opacity-40 hover:opacity-100 cursor-pointer duration-500"
                 style={{
-                  opacity: activeLink === 3 ? 1 : 0.4,
+                  opacity: activeLink === 3 ? 1 : "",
                 }}
               >
                 Favourites
@@ -64,7 +62,7 @@ const NavBar = () => {
               <li
                 className="text-base font-normal my-3 opacity-40 hover:opacity-100 cursor-pointer duration-500"
                 style={{
-                  opacity: activeLink === 4 ? 1 : 0.4,
+                  opacity: activeLink === 4 ? 1 : "",
                 }}
               >
                 Recently Played
