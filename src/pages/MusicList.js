@@ -1,8 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Search from "../components/Search";
 import MusicPlaylist from "../components/MusicPlaylist";
+import { AppContext } from "../context/application-context";
 
 const MusicList = ({ id }) => {
+  const appCtx = useContext(AppContext);
+
+  useEffect(() => {
+    appCtx.setActiveLinkHandler(id);
+  }, [id]);
+
   let playlistName = "";
   if (id === 1) {
     playlistName = "For You";

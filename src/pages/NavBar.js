@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import spotify_logo from "../assets/spotify_logo.png";
 import profile from "../assets/Profile.svg";
 import nav_logo from "../assets/nav_logo.png";
 import { Link } from "react-router-dom";
+import { AppContext } from "../context/application-context";
 
 const NavBar = () => {
   const [navClick, setNavClick] = useState(false);
-  const [activeLink, setActiveLink] = useState(1);
+  const appCtx = useContext(AppContext);
+  const activeLink = appCtx.activeLink;
 
   const navStyle = navClick
     ? "flex flex-col py-8 opacity-1 max-h-screen transition-all duration-700"
@@ -17,7 +19,7 @@ const NavBar = () => {
   };
 
   const activeLinkHandler = (id) => {
-    setActiveLink(id);
+    appCtx.setActiveLinkHandler(id);
   };
 
   return (
