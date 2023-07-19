@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import spotify_logo from "../assets/spotify_logo.png";
+import spotify_logo from "../assets/spotify_logo.svg";
 import profile from "../assets/Profile.svg";
 import nav_logo from "../assets/nav_logo.png";
 import { Link } from "react-router-dom";
@@ -22,6 +22,29 @@ const NavBar = () => {
     appCtx.setActiveLinkHandler(id);
   };
 
+  const navRoutes = [
+    {
+      route: "/",
+      name: "For You",
+      activeLink: 1,
+    },
+    {
+      route: "/top-tracks",
+      name: "Top Tracks",
+      activeLink: 2,
+    },
+    {
+      route: "/favourites",
+      name: "Favourites",
+      activeLink: 3,
+    },
+    {
+      route: "/recently-played",
+      name: "Recently Played",
+      activeLink: 4,
+    },
+  ];
+
   return (
     <div className="flex md:flex-col lg:w-60 text-center justify-between h-auto text-white max-h">
       <div className="flex flex-col">
@@ -30,46 +53,24 @@ const NavBar = () => {
         </div>
         <nav className="text-left h-full duration-500 ease-in-out">
           <ul className={navStyle}>
-            <Link to="/" onClick={() => activeLinkHandler(1)}>
-              <li
-                className="text-base font-normal my-3 opacity-40 hover:opacity-100 cursor-pointer duration-500"
-                style={{
-                  opacity: activeLink === 1 ? 1 : "",
-                }}
-              >
-                For you
-              </li>
-            </Link>
-            <Link to="/top-tracks" onClick={() => activeLinkHandler(2)}>
-              <li
-                className="text-base font-normal my-3 opacity-40 hover:opacity-100 cursor-pointer duration-500"
-                style={{
-                  opacity: activeLink === 2 ? 1 : "",
-                }}
-              >
-                Top Tracks
-              </li>
-            </Link>
-            <Link to="/favourites" onClick={() => activeLinkHandler(3)}>
-              <li
-                className="text-base font-normal my-3 opacity-40 hover:opacity-100 cursor-pointer duration-500"
-                style={{
-                  opacity: activeLink === 3 ? 1 : "",
-                }}
-              >
-                Favourites
-              </li>
-            </Link>
-            <Link to="/recently-played" onClick={() => activeLinkHandler(4)}>
-              <li
-                className="text-base font-normal my-3 opacity-40 hover:opacity-100 cursor-pointer duration-500"
-                style={{
-                  opacity: activeLink === 4 ? 1 : "",
-                }}
-              >
-                Recently Played
-              </li>
-            </Link>
+            {navRoutes.map((data, idx) => {
+              return (
+                <Link
+                  to={data.route}
+                  onClick={() => activeLinkHandler(data.activeLink)}
+                  key={idx}
+                >
+                  <li
+                    className="text-base font-normal my-3 opacity-40 hover:opacity-100 cursor-pointer duration-500"
+                    style={{
+                      opacity: activeLink === data.activeLink ? 1 : "",
+                    }}
+                  >
+                    {data.name}
+                  </li>
+                </Link>
+              );
+            })}
           </ul>
         </nav>
       </div>

@@ -5,7 +5,7 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { ApolloProvider } from "@apollo/client";
 import AppContextProvider from "./context/application-context";
-import client from "./ApolloClient";
+import client from "./apolloGraphql/ApolloClient";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

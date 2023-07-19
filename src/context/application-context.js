@@ -11,13 +11,6 @@ export const AppContext = createContext({
   setBackgroundGradientHandler: (gradient) => {},
   activeLink: 0,
   setActiveLinkHandler: (linkId) => {},
-
-  //   duration: 0,
-  //   setDurationHandler: () => {},
-  //   currentTime: "",
-  //   setCurrentTimeHandler: () => {},
-  //   isPlaying: false,
-  //   setIsPlayingHandler: () => {},
 });
 
 const AppContextProvider = (props) => {
@@ -25,7 +18,7 @@ const AppContextProvider = (props) => {
   const [currentSong, setCurrentsong] = useState({});
   const [currentPlaylist, setCurrentPlaylist] = useState([]);
   const [backgroundGradient, setBackgroundGradient] = useState("");
-  const [activeLink, setActiveLink] = useState(1);
+  const [activeLink, setActiveLink] = useState(0);
 
   useEffect(() => {
     setCurrentsong({
