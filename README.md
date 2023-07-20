@@ -1,7 +1,7 @@
 <h1>Spotify Clone</h1>
 <br/>
 
-Deployed Link -
+Deployed Link - https://samespace-spotify-clone.vercel.app/
 
 ## Description
 
