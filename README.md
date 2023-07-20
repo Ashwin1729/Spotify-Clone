@@ -25,7 +25,9 @@ npm install
 npm start
 ```
 
-( Now run this command to run the application in a development server) 3. Explore...
+( Now run this command to run the application in a development server) 
+
+3. Explore...
 
 ---
 
@@ -47,4 +49,4 @@ npm start
 - #### Deployment : -
   - `Netlify`
 
----
+
