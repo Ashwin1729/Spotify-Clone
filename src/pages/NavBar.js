@@ -46,39 +46,41 @@ const NavBar = () => {
   ];
 
   return (
-    <div className="flex lg:flex-col xl:w-60 text-center justify-between h-auto text-white max-h lg:sticky lg:top-8 lg:h-[calc(100vh-76px)]">
-      <div className="flex flex-col">
-        <div className="flex justify-between items-center">
-          <img src={spotify_logo} alt="spotify_logo" />
-        </div>
-        <nav className="text-left h-full duration-500 ease-in-out">
-          <ul className={navStyle}>
-            {navRoutes.map((data, idx) => {
-              return (
-                <Link
-                  to={data.route}
-                  onClick={() => activeLinkHandler(data.activeLink)}
-                  key={idx}
-                >
-                  <li
-                    className="text-base font-normal my-3 opacity-40 hover:opacity-100 cursor-pointer duration-500"
-                    style={{
-                      opacity: activeLink === data.activeLink ? 1 : "",
-                    }}
+    <div className="slide-in-left">
+      <div className="flex lg:flex-col xl:w-60 text-center justify-between h-auto text-white max-h lg:sticky lg:top-8 lg:h-[calc(100vh-76px)]">
+        <div className="flex flex-col">
+          <div className="flex justify-between items-center">
+            <img src={spotify_logo} alt="spotify_logo" />
+          </div>
+          <nav className="text-left h-full duration-500 ease-in-out">
+            <ul className={navStyle}>
+              {navRoutes.map((data, idx) => {
+                return (
+                  <Link
+                    to={data.route}
+                    onClick={() => activeLinkHandler(data.activeLink)}
+                    key={idx}
                   >
-                    {data.name}
-                  </li>
-                </Link>
-              );
-            })}
-          </ul>
-        </nav>
-      </div>
-      <div className="flex lg:flex-col justify-evenly">
-        <div className="h-12 w-12 max-lg:order-last">
-          <img src={profile} alt="profile" />
+                    <li
+                      className="text-base font-normal my-3 opacity-40 hover:opacity-100 cursor-pointer duration-500"
+                      style={{
+                        opacity: activeLink === data.activeLink ? 1 : "",
+                      }}
+                    >
+                      {data.name}
+                    </li>
+                  </Link>
+                );
+              })}
+            </ul>
+          </nav>
         </div>
-        <NavLogo navClickHandler={navClickHandler} />
+        <div className="flex lg:flex-col justify-evenly">
+          <div className="h-12 w-12 max-lg:order-last">
+            <img src={profile} alt="profile" />
+          </div>
+          <NavLogo navClickHandler={navClickHandler} />
+        </div>
       </div>
     </div>
   );

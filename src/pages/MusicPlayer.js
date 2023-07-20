@@ -26,6 +26,8 @@ const MusicPlayer = () => {
     audioRef.current.load();
     setIsPlaying(true);
     setIsMute(false);
+    const music_player_element = document.getElementById(songInfo?._id);
+    music_player_element?.classList?.add("tilt-in-tr");
   }, [songInfo]);
 
   useEffect(() => {
@@ -101,7 +103,10 @@ const MusicPlayer = () => {
   }
 
   return (
-    <div className="flex flex-col items-center w-1/2 max-lg:w-full text-center my-12 text-white lg:sticky lg:top-20 lg:h-[calc(100vh-200px)]">
+    <div
+      className="flex flex-col items-center w-1/2 max-lg:w-full text-center my-12 text-white lg:sticky lg:top-8 lg:h-[calc(100vh-200px)]"
+      key={songInfo._id}
+    >
       <div className="flex flex-col text-left w-7/12 ">
         <h2 className="text-3xl font-semibold">{songInfo?.title}</h2>
         <p className="text-gray-400">{songInfo?.artist}</p>
@@ -109,6 +114,7 @@ const MusicPlayer = () => {
       <img
         src={songInfo?.photo}
         alt={songInfo?.title}
+        id={songInfo?._id}
         className="rounded-lg object-contain h-7/12 w-7/12 my-6"
       />
       <div className="flex flex-col items-center justify-center w-7/12">
@@ -153,7 +159,7 @@ const MusicPlayer = () => {
         </div>
       </div>
 
-      <audio autoPlay ref={audioRef} onTimeUpdate={currentTimeHandler} />
+      <audio autoPlay muted ref={audioRef} onTimeUpdate={currentTimeHandler} />
     </div>
   );
 };
