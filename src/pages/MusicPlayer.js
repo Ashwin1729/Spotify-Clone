@@ -159,7 +159,7 @@ const MusicPlayer = () => {
         </div>
       </div>
 
-      <audio autoPlay muted ref={audioRef} onTimeUpdate={currentTimeHandler} />
+      <audio autoPlay ref={audioRef} onTimeUpdate={currentTimeHandler} />
     </div>
   );
 };
