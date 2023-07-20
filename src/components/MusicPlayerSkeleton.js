@@ -10,7 +10,7 @@ import {
 
 const MusicPlayerSkeleton = ({ audioRef }) => {
   return (
-    <div className="flex flex-col items-center w-1/2 max-md:w-full text-center my-12 text-white animate-pulse">
+    <div className="flex flex-col items-center w-1/2 max-lg:w-full text-center my-12 text-white animate-pulse">
       <div className="flex flex-col text-left w-96 ">
         <h2 className="h-6 mb-3 bg-slate-200 rounded w-60"></h2>
         <p className="h-3 bg-slate-200 rounded w-32"></p>

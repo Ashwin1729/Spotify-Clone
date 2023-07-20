@@ -12,7 +12,7 @@ const NavBar = () => {
 
   const navStyle = navClick
     ? "flex flex-col py-8 opacity-1 max-h-screen transition-all duration-700"
-    : "flex flex-col py-8 max-md:opacity-0 max-md:max-h-0 transition-all duration-700";
+    : "flex flex-col py-8 max-lg:opacity-0 max-lg:max-h-0 transition-all duration-700";
 
   const navClickHandler = () => {
     setNavClick((prevNavClick) => !prevNavClick);
@@ -46,7 +46,7 @@ const NavBar = () => {
   ];
 
   return (
-    <div className="flex md:flex-col lg:w-60 text-center justify-between h-auto text-white max-h">
+    <div className="flex lg:flex-col xl:w-60 text-center justify-between h-auto text-white max-h">
       <div className="flex flex-col">
         <div className="flex justify-between items-center">
           <img src={spotify_logo} alt="spotify_logo" />
@@ -74,12 +74,12 @@ const NavBar = () => {
           </ul>
         </nav>
       </div>
-      <div className="flex md:flex-col justify-evenly">
-        <div className="h-12 w-12 max-md:order-last">
+      <div className="flex lg:flex-col justify-evenly">
+        <div className="h-12 w-12 max-lg:order-last">
           <img src={profile} alt="profile" />
         </div>
         <div
-          className="h-10 w-10 mx-4 my-1.5 rounded-full bg-white md:hidden cursor-pointer"
+          className="h-10 w-10 mx-4 my-1.5 rounded-full bg-white lg:hidden cursor-pointer"
           onClick={navClickHandler}
         >
           <img src={nav_logo} alt="navigation_logo" className="" />

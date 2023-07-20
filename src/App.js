@@ -11,11 +11,11 @@ function App() {
 
   return (
     <div
-      className="flex max-md:flex-col p-8 bg-bg_theme"
+      className="flex max-lg:flex-col p-8 bg-bg_theme"
       style={{ background: backgroundGradient }}
     >
       <NavBar />
-      <div className="grow text-center max-md:order-last">
+      <div className="grow text-center max-lg:order-last">
         <Routes>
           <Route path="/" element={<Outlet />}>
             <Route index element={<MusicList id={1} />} />
