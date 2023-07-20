@@ -101,7 +101,7 @@ const MusicPlayer = () => {
   }
 
   return (
-    <div className="flex flex-col items-center w-1/2 max-lg:w-full text-center my-12 text-white">
+    <div className="flex flex-col items-center w-1/2 max-lg:w-full text-center my-12 text-white lg:sticky lg:top-20 lg:h-[calc(100vh-200px)]">
       <div className="flex flex-col text-left w-7/12 ">
         <h2 className="text-3xl font-semibold">{songInfo?.title}</h2>
         <p className="text-gray-400">{songInfo?.artist}</p>

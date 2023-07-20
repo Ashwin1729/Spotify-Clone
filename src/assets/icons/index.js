@@ -6,3 +6,4 @@ export * from "./play-icon";
 export * from "./previous-icon";
 export * from "./search-icon";
 export * from "./unmute-icon";
+export * from "./nav-logo";
