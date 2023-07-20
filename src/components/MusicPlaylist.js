@@ -27,7 +27,7 @@ const MusicPlaylist = ({ id }) => {
     const colorThief = new ColorThief();
     const img = new Image();
     img.crossOrigin = "Anonymous";
-    img.src = song.photo;
+    img.src = song?.photo;
     img.addEventListener("load", () => {
       const color = colorThief.getColor(img);
       const colorString = `linear-gradient(160deg , rgb(${color.join(

@@ -9,6 +9,7 @@ import {
   MuteIcon,
   UnmuteIcon,
 } from "../assets/icons/index";
+import MusicPlayerSkeleton from "../components/MusicPlayerSkeleton";
 
 const MusicPlayer = () => {
   const appCtx = useContext(AppContext);
@@ -28,7 +29,7 @@ const MusicPlayer = () => {
   }, [songInfo]);
 
   useEffect(() => {
-    if (initialRender.current && appCtx.currentPlaylist.length > 0) {
+    if (initialRender.current && appCtx.currentPlaylist?.length > 0) {
       initialRender.current = false;
       setIsPlaying(false);
       return;
@@ -94,6 +95,10 @@ const MusicPlayer = () => {
 
     appCtx.setCurrentSongHandler(appCtx.currentPlaylist[newIndex]);
   };
+
+  if (!songInfo) {
+    return <MusicPlayerSkeleton audioRef={audioRef} />;
+  }
 
   return (
     <div className="flex flex-col items-center w-1/2 max-md:w-full text-center my-12 text-white">

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import Search from "../components/Search";
 import MusicPlaylist from "../components/MusicPlaylist";
 import { AppContext } from "../context/application-context";

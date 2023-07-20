@@ -1,4 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
+import { GET_SONGS } from "../apolloGraphql/apollo-queries";
+import { useQuery } from "@apollo/client";
 
 export const AppContext = createContext({
   search: "",
@@ -20,21 +22,26 @@ const AppContextProvider = (props) => {
   const [backgroundGradient, setBackgroundGradient] = useState("");
   const [activeLink, setActiveLink] = useState(0);
 
+  const { loading, error, data } = useQuery(GET_SONGS, {
+    variables: {
+      playlistId: activeLink,
+      search: search === "" ? null : search,
+    },
+  });
+
   useEffect(() => {
-    setCurrentsong({
-      _id: "61b6f14dc2f7cafd968c31f0",
-      title: "Starboy",
-      artist: "Weeknd",
-      photo:
-        "https://images.genius.com/e95f361c27487088fd9dddf8c967bf89.500x500x1.jpg",
-      url: "https://storage.googleapis.com/similar_sentences/Imagine%20Dragons%20-%20West%20Coast%20(Pendona.com).mp3",
-      duration: 320,
-    });
+    if (currentPlaylist?.length === 0) {
+      setCurrentPlaylist(data?.getSongs);
+    }
+
+    if (Object.keys(currentSong ? currentSong : {}).length === 0) {
+      setCurrentsong(data?.getSongs[0]);
+    }
 
     setBackgroundGradient(
       "linear-gradient(160deg, #2d3748 8%, rgba(1,0,2,1) 90%)"
     );
-  }, []);
+  }, [data]);
 
   const setSearchHandler = (searchField) => {
     setSearch(searchField);
