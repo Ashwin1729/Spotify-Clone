@@ -10,7 +10,7 @@ Deployed Link -
 
 ---
 
-## Explore Application✨
+## Explore Application
 
 1. Open the VS code or any code editor and clone this repository from my github.
 2. Now open the terminal and type the following commands to run this project ---
