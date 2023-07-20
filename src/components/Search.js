@@ -3,6 +3,7 @@ import { AppContext } from "../context/application-context";
 import { SearchIcon } from "../assets/icons/index";
 
 const Search = () => {
+  // context data
   const searchRef = useRef();
   const appCtx = useContext(AppContext);
 

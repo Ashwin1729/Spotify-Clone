@@ -10,6 +10,8 @@ const MusicList = ({ id }) => {
     appCtx.setActiveLinkHandler(id);
   }, [id]);
 
+  // customizing playlist name according to id
+
   let playlistName = "";
   if (id === 1) {
     playlistName = "For You";

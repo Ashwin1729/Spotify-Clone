@@ -11,7 +11,7 @@ function App() {
   const backgroundGradient = appCtx.backgroundGradient;
 
   return (
-    <div className="fade-in-fwd ">
+    <div className="fade-in-fwd">
       <div
         className="flex max-lg:flex-col p-8 bg-bg_theme"
         style={{ background: backgroundGradient }}

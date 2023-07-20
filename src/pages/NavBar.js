@@ -14,6 +14,8 @@ const NavBar = () => {
     ? "flex flex-col py-8 opacity-1 max-h-screen transition-all duration-700"
     : "flex flex-col py-8 max-lg:opacity-0 max-lg:max-h-0 transition-all duration-700";
 
+  // nav links handler
+
   const navClickHandler = () => {
     setNavClick((prevNavClick) => !prevNavClick);
   };
@@ -21,6 +23,8 @@ const NavBar = () => {
   const activeLinkHandler = (id) => {
     appCtx.setActiveLinkHandler(id);
   };
+
+  // initialising navigation routes data
 
   const navRoutes = [
     {

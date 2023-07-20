@@ -6,6 +6,8 @@ import SkeletonCard from "./SkeletonCard";
 import MusicCard from "./MusicCard";
 import { GET_SONGS } from "../apolloGraphql/apollo-queries";
 
+// Initialising skeleton for Music Playlist
+
 let skeleton = [];
 
 for (let i = 0; i < 10; i++) {
@@ -22,6 +24,8 @@ const MusicPlaylist = ({ id }) => {
       search: appCtx.search === "" ? null : appCtx.search,
     },
   });
+
+  // Implementation of Background Gradient
 
   const implementGradient = (song) => {
     const colorThief = new ColorThief();

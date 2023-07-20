@@ -1,3 +1,5 @@
+// all the assets exported so that they can be imported from same file
+
 export * from "./mute-icon";
 export * from "./next-icon";
 export * from "./options-icon";

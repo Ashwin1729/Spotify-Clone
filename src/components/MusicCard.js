@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { AppContext } from "../context/application-context";
 
 const MusicCard = ({ song }) => {
+  // context data
   const appCtx = useContext(AppContext);
   const currentSong = appCtx.currentSong;
 

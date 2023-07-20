@@ -12,9 +12,13 @@ import {
 import MusicPlayerSkeleton from "../components/MusicPlayerSkeleton";
 
 const MusicPlayer = () => {
+  // context data
   const appCtx = useContext(AppContext);
+
   const audioRef = useRef();
   const initialRender = useRef(true);
+
+  // music controllers hooks
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMute, setIsMute] = useState(false);
   const [currentTime, setCurrentTime] = useState("0:00");
@@ -38,6 +42,10 @@ const MusicPlayer = () => {
     }
   }, [appCtx.currentPlaylist]);
 
+  useEffect(() => {
+    audioRef.current.muted = isMute;
+  }, [isMute]);
+
   const playButtonHandler = () => {
     if (isPlaying) {
       audioRef.current.pause();
@@ -48,9 +56,7 @@ const MusicPlayer = () => {
     }
   };
 
-  useEffect(() => {
-    audioRef.current.muted = isMute;
-  }, [isMute]);
+  // Music player controller handler functions
 
   const muteHandler = () => {
     setIsMute((prevMuteState) => !prevMuteState);
@@ -97,6 +103,8 @@ const MusicPlayer = () => {
 
     appCtx.setCurrentSongHandler(appCtx.currentPlaylist[newIndex]);
   };
+
+  // skeleton loading
 
   if (!songInfo) {
     return <MusicPlayerSkeleton audioRef={audioRef} />;

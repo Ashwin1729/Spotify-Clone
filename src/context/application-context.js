@@ -2,6 +2,8 @@ import React, { createContext, useEffect, useState } from "react";
 import { GET_SONGS } from "../apolloGraphql/apollo-queries";
 import { useQuery } from "@apollo/client";
 
+// Initial context structure
+
 export const AppContext = createContext({
   search: "",
   setSearchHandler: (searchField) => {},
@@ -14,6 +16,8 @@ export const AppContext = createContext({
   activeLink: 0,
   setActiveLinkHandler: (linkId) => {},
 });
+
+// Context provider
 
 const AppContextProvider = (props) => {
   const [search, setSearch] = useState("");
@@ -43,6 +47,8 @@ const AppContextProvider = (props) => {
     );
   }, [data]);
 
+  // data updating handlers
+
   const setSearchHandler = (searchField) => {
     setSearch(searchField);
   };
@@ -62,6 +68,8 @@ const AppContextProvider = (props) => {
   const setActiveLinkHandler = (linkId) => {
     setActiveLink(linkId);
   };
+
+  // context store initialization
 
   const store = {
     search,
