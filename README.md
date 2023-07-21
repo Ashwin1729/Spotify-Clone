@@ -47,6 +47,6 @@ npm start
   - `Tailwind CSS `
 
 - #### Deployment : -
-  - `Netlify`
+  - `Vercel`
 
 
